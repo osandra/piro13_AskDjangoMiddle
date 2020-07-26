@@ -12,7 +12,8 @@ from django.contrib.auth import login as auth_login
 #             user = form.save()
 #             #등록 후 바로 로그인 처리
 #             auth_login(request,user)
-#             return redirect('profile')
+#             next_url = request.GET.get('next') or 'profile' #next값 없으면 profile로
+#             return redirect(next_url)
 #             # return redirect(settings.LOGIN_URL)  # 로그인 창으로
 #     else:
 #         form = UserCreationForm()
@@ -26,6 +27,8 @@ class SignupView(CreateView):
     form_class = UserCreationForm
     template_name = 'accounts/signup.html'
     def get_success_url(self):
+        next_url = self.request.GET.get('next') or 'profile'
+        return resolve_url(next_url)
         return resolve_url('profile')
     def form_valid(self, form):
         user = form.save()
