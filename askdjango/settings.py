@@ -56,8 +56,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'askdjango.urls'
 
+LOGIN_URL = reverse_lazy('login')
+LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
-# LOGOUT_REDIRECT_URL = reverse_lazy('login')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
